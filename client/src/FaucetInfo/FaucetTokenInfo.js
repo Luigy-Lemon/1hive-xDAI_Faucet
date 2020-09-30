@@ -12,19 +12,10 @@ const columns = [
     maxWidth: '100px'
   },
   {
-    name: 'Matic ETH',
-    selector: 'payoutEth',
-    maxWidth: '100px'
-  },
-  {
-    name: 'Test ERC20',
+    name: 'xDAI',
     selector: 'payoutTestErc20',
     maxWidth: '100px',
     wrap: true
-  },
-  {
-    name: 'TEST ERC20 Token Address',
-    selector: 'testErc20Address'
   }
 ];
 
@@ -68,7 +59,7 @@ class FaucetTokenInfo extends Component {
     if (!this.state.faucettokeninfo) return null;
     return (
       <DataTable
-        title="Token Payout Status"
+        title="Payouts Status"
         columns={columns}
         data={this.state.faucettokeninfo}
         dense

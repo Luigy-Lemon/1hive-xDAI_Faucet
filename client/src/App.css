@@ -8,3 +8,23 @@ h1 {
   font-family: 'Muli', sans-serif;
   font-size: 20px;
 }
+
+.built-by-bees{
+  padding-top:5vh;
+  max-width:40vw;
+  max-height:100%;
+}
+
+.built-by-bees_div{
+  height:25vh;
+  text-align: center;
+}
+
+.hero.is-light{
+  background: url("/header-background.svg") center center no-repeat;
+  background-color: rgba(124, 224, 214, 0.6);
+}
+
+.columns{
+  max-width:100vw;
+}

@@ -13,8 +13,8 @@ class FaucetRequestMain extends Component {
     super(props);
     this.state = { 
       targetAccount: "", 
-      selectedNetwork: "",
-      selectedToken: "testErc20",
+      selectedNetwork: "xdai",
+      selectedToken: "xdai",
       requestrunning: false,
       // faucetERC20Contract: null
     };

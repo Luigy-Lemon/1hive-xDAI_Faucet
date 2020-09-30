@@ -7,11 +7,11 @@ import axios from "axios";
 class FaucetRequest extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      targetAccount: "", 
-      selectedNetwork: "",
-      selectedToken: "",
-      requestrunning: false ,
+    this.state = {
+      targetAccount: "",
+      selectedNetwork: "xdai",
+      selectedToken: "xdai",
+      requestrunning: false,
     };
     this.networkChange = this.networkChange.bind(this);
     this.tokenChange = this.tokenChange.bind(this);
@@ -27,7 +27,7 @@ class FaucetRequest extends Component {
 
   }
   networkChange(e) {
-    this.setState ({
+    this.setState({
       selectedNetwork: e.currentTarget.value
     })
   }
@@ -44,7 +44,7 @@ class FaucetRequest extends Component {
     if (Eth.isAddress(this.state.targetAccount)) {
       this.setState({ requestrunning: true });
 
-      let apiUrl = config.get("apiurl") +"/"+ this.state.selectedNetwork + "/" + this.state.selectedToken + "/" + this.state.targetAccount;
+      let apiUrl = config.get("apiurl") + "/" + this.state.selectedNetwork + "/" + this.state.selectedToken + "/" + this.state.targetAccount;
       axios
         .get(apiUrl)
         .then(response => {
@@ -74,22 +74,22 @@ class FaucetRequest extends Component {
           }
           if (error.response.status === 500) {
             // console.log(error.response)
-              if (error.response.data.err.duration) {
-                let t = Math.ceil(error.response.data.err.duration / 1000);
-                this.setState({
-                  fauceterror: {
-                    message: error.response.data.message,
-                    duration: error.response.data.duration,
-                    timespan: t
-                  }
-                });
-              } else {
-                this.setState({
-                  fauceterror: {
-                    message: 'Transaction error'
-                  }
-                })
-              }
+            if (error.response.data.duration) {
+              let t = Math.ceil(error.response.data.err.duration / 1000);
+              this.setState({
+                fauceterror: {
+                  message: error.response.data.message,
+                  duration: error.response.data.duration,
+                  timespan: t
+                }
+              });
+            } else {
+              this.setState({
+                fauceterror: {
+                  message: 'Transaction error'
+                }
+              })
+            }
             return;
           }
         });
@@ -103,7 +103,7 @@ class FaucetRequest extends Component {
     window.addEventListener("load", () => {
       // See if there is a pubkey on the URL
       let urlTail = window.location.search.substring(1);
-      if (Eth.isAddress(urlTail)){
+      if (Eth.isAddress(urlTail)) {
         this.setState({ targetAccount: urlTail });
         return;
       }
@@ -129,7 +129,7 @@ class FaucetRequest extends Component {
               this.setState({ targetAccount: accounts[0] });
             }
           })
-          .catch(() => {});
+          .catch(() => { });
       }
     });
   }
@@ -139,74 +139,19 @@ class FaucetRequest extends Component {
       <div className="">
         <section className="section">
           <div className="container bottompadding">
-          <h3>Get tokens on Child Chain</h3>
-          <hr></hr>
-          <div class = "columns">
-            <div class = "column is-one-quarter">
-            <span>Select Token:</span>
-            </div>
-            <div class = "column is-auto">
-            <div class = "columns">
-            <div class = "column is-3">
-            <input type="radio"
-                   value="testErc20"
-                   checked={this.state.selectedToken === "testErc20"}
-                   onChange={this.tokenChange} />&nbsp;Test Token
-                   </div>
-            <div class = "column is-3">
-            <input type="radio"
-                   value="maticeth"
-                   checked={this.state.selectedToken === "maticeth"}
-                   onChange={this.tokenChange}/>&nbsp;Matic ETH
-                   </div>
-
-            </div>
-            </div>
-          </div>
-          {/* <hr /> */}
-          <div class = "columns">
-            <div class = "column is-one-quarter">
-            <span>Select Network:</span>
-            </div>
-            <div class = "column is-auto">
-              <div class = "columns">
-                <div class = "column is-3">
-            <input type="radio"
-                   value="testnet2"
-                   checked={this.state.selectedNetwork === "testnet2"}
-                   onChange={this.networkChange} />&nbsp;Testnet2
-                   </div>
-                   <div class = "column is-3">
-            <input type="radio"
-                   value="testnetv3"
-                   checked={this.state.selectedNetwork === "testnetv3"}
-                   onChange={this.networkChange}/>&nbsp;Testnet3
-                   </div>
-                   <div class = "column is-3">
-            <input type="radio"
-                   value="alpha.ethereum"
-                   checked={this.state.selectedNetwork === "alpha.ethereum"}
-                   onChange={this.networkChange} />&nbsp;Alpha
-                   </div>
-                   <div class = "column is-3">
-            <input type="radio"
-                   value="betav2"
-                   checked={this.state.selectedNetwork === "betav2"}
-                   onChange={this.networkChange}/>&nbsp;Beta2
-                   </div>
-              </div>
-            </div>
-          </div>
+            <h3>With xDAI, $0.01 allows you to do a lot transactions</h3>
+            <hr></hr>
+            
             <form onSubmit={this.handleSubmit}>
               <div className="field">
                 <label className="label">
-                  Enter your testnet account address
+                  Enter your xDAI account address 
                 </label>
                 <div className="control">
                   <input
                     className="input is-info"
                     type="text"
-                    placeholder="Enter your testnet account address"
+                    placeholder="Enter your xDAI account address (case-sensitive)"
                     value={this.state.targetAccount}
                     onChange={this.handleChange}
                   />
@@ -231,50 +176,50 @@ class FaucetRequest extends Component {
             {this.state.faucetresponse ? (
               <div>
                 <hr />
-              <article
-                className="message is-success"
-                onClick={this.clearMessages}
-              >
-                <div className="message-body">
-                  <p>Tokens sent to {this.state.targetAccount}.</p>
-                  <p>
-                    Transaction hash{" "}
-                    <a
-                      target="_new"
-                      href={this.state.faucetresponse.etherscanlink}
-                    >
-                      {this.state.faucetresponse.txhash}
-                    </a>
-                  </p>
-                </div>
-              </article>
+                <article
+                  className="message is-success"
+                  onClick={this.clearMessages}
+                >
+                  <div className="message-body">
+                    <p>Tokens sent to {this.state.targetAccount}.</p>
+                    <p>
+                      Transaction hash{" "}
+                      <a
+                        target="_new"
+                        href={this.state.faucetresponse.etherscanlink}
+                      >
+                        {this.state.faucetresponse.txhash}
+                      </a>
+                    </p>
+                  </div>
+                </article>
               </div>
             ) : (
-              <p />
-            )}
+                <p />
+              )}
             {this.state.fauceterror ? (
               <div>
                 <hr />
-              <article
-                className="message is-danger"
-                onClick={this.clearMessages}
-              >
-                <div className="message-body">
-                <b>{this.state.fauceterror.message}</b><br/>
-                  {this.state.fauceterror.timespan ? (
-                    <span>
-                      You are greylisted for another{" "}
-                      {this.state.fauceterror.timespan} seconds.
-                    </span>
-                  ) : (
-                    <span />
-                  )}
-                </div>
-              </article>
+                <article
+                  className="message is-danger"
+                  onClick={this.clearMessages}
+                >
+                  <div className="message-body">
+                    <b>{this.state.fauceterror.message}</b><br />
+                    {this.state.fauceterror.timespan ? (
+                      <span>
+                        You are greylisted for another{" "}
+                        {this.state.fauceterror.timespan} seconds.
+                      </span>
+                    ) : (
+                        <span />
+                      )}
+                  </div>
+                </article>
               </div>
             ) : (
-              <p />
-            )}
+                <p />
+              )}
           </div>
         </section>
       </div>

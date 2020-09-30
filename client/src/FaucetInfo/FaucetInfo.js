@@ -6,10 +6,10 @@ import DataTable from 'react-data-table-component';
 
 const columns = [
   {
-    name: 'Network',
+    name: 'Network RPC',
     selector: 'network',
     sortable: true,
-    maxWidth: '50px'
+    maxWidth: '150px'
   },
   {
     name: 'Account',
@@ -19,14 +19,9 @@ const columns = [
     wrap: true
   },
   {
-    name: 'ETH Balance',
+    name: 'xDAI Balance',
     maxWidth: '100px',
     selector: 'balanceEth'
-  }, 
-  {
-    name: 'TERC20 Balance',
-    maxWidth: '100px',
-    selector: 'balanceTestErc20'
   }
 ];
 
