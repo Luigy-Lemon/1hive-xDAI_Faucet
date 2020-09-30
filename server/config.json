@@ -1,7 +1,7 @@
 {
     "httpport": 3000,
     "checkfreqinsec": 5,
-    "greylistdurationinsec": 1,
+    "greylistdurationinsec": 600,
     "networks": {
         "xdai": {
             "rpc":"https://rpc.xdaichain.com",

@@ -1,10 +1,8 @@
-FORKED 
-
-# Matic-ETH faucet server
+# xDAI-ETH faucet server
 
 built upon: https://github.com/sponnet/locals-faucetserver
 
-supports matic-eth and test-erc20 token transfers to (pay out amount `1` maticEth and `2` test erc20 tokens) beta2, alpha, testnet2, testnet3, ropsten and eth-mainnet
+supports xDAI and test-erc20 token transfers to (pay out amount `1` xdai and `2` test erc20 tokens),  ropsten and eth-mainnet
 
 - payout frequency: 120 seconds
 - server check frequency: 10 seconds
@@ -18,8 +16,8 @@ address and ip are 'greylisted' right after a successful transaction - for 60 se
 # installing
 
 ```
-$ git clone https://github.com/nglglhtr/matic-faucet
-$ cd matic-faucet && cd server && npm install
+$ git clone https://github.com/Luigy-Lemon/1hive-xDAI_Faucet.git xDAI-faucet
+$ cd xDAI-faucet && cd server && npm install
 $ cd .. && cd client && npm install
 $ cd ..
 ```
@@ -86,17 +84,13 @@ edit the file `client/src/config.js` and specify the base URL for your API. Run 
 - #### Network Name
 |name|RPC|
 |---|---|
-|`testnet2`|`https://testnet2.matic.network`|
-|`testnetv3`|`https://testnetv3.matic.network`|
-|`alpha.ethereum`|`https://alpha.ethereum.matic.network`|
-|`betav2`|`https://betav2.matic.network`|
-|`ropsten`|`infura node url`|
+|`xdai`|`https://blockscout.com/poa/xdai`|
+
 
 - #### token
 |name|token|
 |---|---|
-|`maticeth`|the native coin on these testnets|
-|`testErc20`|TEST token - can be used to deposit/withdraw from Matic networks|
+|`xdai`|the native coin on these testnets|
 
 
 - #### ethereum address
@@ -122,7 +116,7 @@ Status code: 500
 
 ## Example Usage
 
-`curl http://localhost:3000/ropsten/testErc20/0x96C42C56fdb78294F96B0cFa33c92bed7D75F96a`
+`curl http://localhost:1337/ropsten/testErc20/0x96C42C56fdb78294F96B0cFa33c92bed7D75F96a`
 
 
 ## HTTP Return / error codes
